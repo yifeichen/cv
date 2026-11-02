@@ -1,0 +1,188 @@
+<mat-toolbar class="cv-toolbar">
+  <div class="toolbar-content">
+    <h1>{{ name }}</h1>
+    <p class="title">{{ title }}</p>
+
+    <nav class="contact" aria-label="Contact information">
+      @for (item of contact; track item.label) {
+        @if (item.href) {
+          <a
+            mat-button
+            class="contact-link"
+            [href]="item.href"
+            [attr.target]="item.external ? '_blank' : null"
+            [attr.rel]="item.external ? 'noopener' : null"
+            [matTooltip]="item.tooltip"
+          >
+            <mat-icon>{{ item.icon }}</mat-icon>
+            {{ item.label }}
+          </a>
+        } @else {
+          <span class="contact-item" [matTooltip]="item.tooltip">
+            <mat-icon>{{ item.icon }}</mat-icon>
+            {{ item.label }}
+          </span>
+        }
+      }
+    </nav>
+  </div>
+</mat-toolbar>
+
+<main class="cv-container">
+  <mat-accordion multi class="cv-accordion">
+    <mat-expansion-panel expanded>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>psychology</mat-icon>
+          Skills
+        </mat-panel-title>
+        <mat-panel-description>Programming languages and development practices</mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-card appearance="outlined" class="skill-card">
+        <mat-card-header>
+          <mat-icon mat-card-avatar>terminal</mat-icon>
+          <mat-card-title>Programming Languages</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+          <mat-list class="bullet-list">
+            @for (skill of programmingSkills; track skill) {
+              <mat-list-item>
+                <mat-icon matListItemIcon>chevron_right</mat-icon>
+                <span matListItemTitle>{{ skill }}</span>
+              </mat-list-item>
+            }
+          </mat-list>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card appearance="outlined" class="skill-card">
+        <mat-card-header>
+          <mat-icon mat-card-avatar>handyman</mat-icon>
+          <mat-card-title>Software Development Practices</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+          <mat-list class="bullet-list">
+            @for (practice of practices; track practice) {
+              <mat-list-item>
+                <mat-icon matListItemIcon>chevron_right</mat-icon>
+                <span matListItemTitle>{{ practice }}</span>
+              </mat-list-item>
+            }
+          </mat-list>
+        </mat-card-content>
+      </mat-card>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel expanded>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>translate</mat-icon>
+          Languages
+        </mat-panel-title>
+        <mat-panel-description>Fluent in English, French, and Chinese</mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-card appearance="outlined" class="section-card">
+        <mat-card-content>
+          <mat-chip-set aria-label="Spoken languages">
+            @for (language of languages; track language.label) {
+              <mat-chip highlighted>
+                <mat-icon matChipAvatar>language</mat-icon>
+                {{ language.label }}
+              </mat-chip>
+            }
+          </mat-chip-set>
+        </mat-card-content>
+      </mat-card>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel expanded>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>work</mat-icon>
+          Work Experience
+        </mat-panel-title>
+        <mat-panel-description>Professional experience</mat-panel-description>
+      </mat-expansion-panel-header>
+
+      @for (job of jobs; track job.company) {
+        <mat-card appearance="outlined" class="job-card">
+          <mat-card-header>
+            <mat-icon mat-card-avatar>business</mat-icon>
+            <mat-card-title>{{ job.role }} &mdash; {{ job.company }}</mat-card-title>
+            <mat-card-subtitle>{{ job.location }} &bull; {{ job.period }}</mat-card-subtitle>
+          </mat-card-header>
+
+          <mat-card-content>
+            <mat-list class="bullet-list">
+              @for (bullet of job.bullets; track bullet) {
+                <mat-list-item>
+                  <mat-icon matListItemIcon>chevron_right</mat-icon>
+                  <span matListItemTitle>{{ bullet }}</span>
+                </mat-list-item>
+              }
+            </mat-list>
+          </mat-card-content>
+        </mat-card>
+      }
+    </mat-expansion-panel>
+
+    <mat-expansion-panel expanded>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>business_center</mat-icon>
+          Internships
+        </mat-panel-title>
+        <mat-panel-description>Internship experience</mat-panel-description>
+      </mat-expansion-panel-header>
+
+      @for (job of internships; track job.company) {
+        <mat-card appearance="outlined" class="job-card">
+          <mat-card-header>
+            <mat-icon mat-card-avatar>business</mat-icon>
+            <mat-card-title>{{ job.role }} &mdash; {{ job.company }}</mat-card-title>
+            <mat-card-subtitle>{{ job.location }} &bull; {{ job.period }}</mat-card-subtitle>
+          </mat-card-header>
+
+          <mat-card-content>
+            <mat-list class="bullet-list">
+              @for (bullet of job.bullets; track bullet) {
+                <mat-list-item>
+                  <mat-icon matListItemIcon>chevron_right</mat-icon>
+                  <span matListItemTitle>{{ bullet }}</span>
+                </mat-list-item>
+              }
+            </mat-list>
+          </mat-card-content>
+        </mat-card>
+      }
+    </mat-expansion-panel>
+
+    <mat-expansion-panel expanded>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>school</mat-icon>
+          Education
+        </mat-panel-title>
+        <mat-panel-description>Academic background</mat-panel-description>
+      </mat-expansion-panel-header>
+
+      @for (edu of education; track edu.degree) {
+        <mat-card appearance="outlined" class="education-card">
+          <mat-card-header>
+            <mat-icon mat-card-avatar>school</mat-icon>
+            <mat-card-title>{{ edu.school }}</mat-card-title>
+            <mat-card-subtitle>{{ edu.period }}</mat-card-subtitle>
+          </mat-card-header>
+
+          <mat-card-content>
+            <p>{{ edu.degree }}</p>
+          </mat-card-content>
+        </mat-card>
+      }
+    </mat-expansion-panel>
+  </mat-accordion>
+</main>
